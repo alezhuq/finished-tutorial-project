@@ -173,6 +173,7 @@ CELERY_TASK_TIME_LIMIT = 1 * 60
 
 import django_heroku
 django_heroku.settings(locals(), staticfiles=False)
+del DATABASES['default']['OPTIONS']['sslmode']
 if os.environ.get('DEBUG') == "TRUE":
     DEBUG = True
 elif os.environ.get('DEBUG') == "FALSE":
