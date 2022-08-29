@@ -19,12 +19,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=vow9_w-ppj#f_g@b(jptl-89!)ponr5qsekxd0-6!*&_e=$xc'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['gentle-headland-54792.herokuapp.com']
 
 # Application definition
 
@@ -172,3 +172,10 @@ CELERY_TIMEZONE = "Australia/Tasmania"
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 1 * 60
 
+
+import django_heroku
+django_heroku.settings(locals(), staticfiles=False)
+if os.environ.get('DEBUG') == "TRUE":
+    DEBUG = True
+elif os.environ.get('DEBUG') == "FALSE":
+    DEBUG = False
